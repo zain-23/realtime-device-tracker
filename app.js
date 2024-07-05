@@ -22,7 +22,13 @@ app.get("/", (req, res) => {
 
 // socket connection
 io.on("connection", (socket) => {
-  console.log("a user connected", socket);
+  console.log("a user connected");
+  socket.on("send-location", (data) => {
+    io.emit("recieve-location", { id: socket.id, ...data });
+  });
+  socket.on("disconnect", () => {
+    io.emit("user-disconnected", socket.id);
+  });
 });
 
 // server
