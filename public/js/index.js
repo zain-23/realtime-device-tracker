@@ -7,9 +7,7 @@ if (navigator.geolocation) {
       socket.emit("send-location", { latitude, longitude });
     },
     (error) => {
-      if (error.code === 1) {
-        alert("Please the allow location");
-      }
+      console.error(error)
     },
     {
       enableHighAccuracy: true,
